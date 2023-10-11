@@ -1,5 +1,9 @@
 # ACL_2023_Totally_Spies
 
+Sprint 1:
+- faire la classe héros 
+- choisir le language a utiliser 
+
 Contenu de la séance : comprendre les commandes, créer les documents 
 
 Objectifs : 
