@@ -1,15 +1,12 @@
 Sprint 1 :
-- faire la classe personnage 
-- faire la classe héros
-- faire la classe monstres 
---> Guillian 
-- commencer l'interface graphique 
---> Apolline 
-- faire la classe labyrinthe 
---> Thomas 
-- faire la classe attaques 
-- faire la classe point de vie 
---> Romane 
+- faire la classe personnage --> Guillian 
+- faire la classe héros --> Guillian 
+- faire la classe monstres --> Guillian 
+- commencer l'interface graphique --> Apolline
+- faire la classe labyrinthe --> Thomas 
+- faire la classe attaques --> Romane 
+- faire la classe point de vie --> Romane
+
 
 Sprint 2 :
 - améliorer l'interface graphique : au niveau du labyrinthe (avoir différentes versions) et au niveau des personnages 
