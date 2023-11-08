@@ -9,14 +9,17 @@ Sprint 1 :
 
 
 Sprint 2 :
-- améliorer l'interface graphique : au niveau du labyrinthe (avoir différentes versions) et au niveau des personnages 
-- faire la classe évènements spéciaux 
+- push des classes faites au sprint 1 --> Tout le monde
+- faire la classe evenements spéciaux --> Romane
+- afficher labyrinthe sur l'interface graphique --> Apolline et Thomas
+- déplacer les monstres aléatoirements en évitants les murs --> Guillian
 
 Sprint 3 :
-- terminer l'interface graphique 
-- ajout de possibles animations 
-- réalisation d'une partie jouable 
+- afficher le héros et les monstres sur l'interface graphique --> Apolline
+- relier les touches du claviers aux déplacements du héros --> Guillian
+- réalisation d'une partie jouable --> Tout le monde
+- réalisation d'un main commun pour jouer --> Tout le monde
 
 Sprint 4 :
-- marge de temps pour une possible prise de retard 
-- essai d'une partie complète et donc debug des possibles problèmes  
+- ajout de possibles animations --> Apolline
+- essai d'une partie complète et donc debug des possibles problèmes --> Tout le monde
