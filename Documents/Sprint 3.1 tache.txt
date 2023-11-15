@@ -1,0 +1,6 @@
+1- niveau key listener                                               ----------> Apolline
+2- Main interacton hero avec le jeu (second temps)                       ------> Romane
+3- Labyrinthe gui relié avec perso et labyrinthe (prendre position)    --------> Thomas
+4- Monstre sur le labyrinthe et bouge (prendre position)                -------> Guilian
+5- Mettre objet speciaux sur le labyrinthe (position)                    ------> Apolline
+6- Case finir le jeux (Objet speciaux)                                    -----> Romane
