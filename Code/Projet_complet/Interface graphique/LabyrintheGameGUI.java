@@ -1,3 +1,4 @@
+package projet_totally_spies;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -11,7 +12,7 @@ public class LabyrintheGameGUI {
 	private JFrame frame;
 	 
 	/*
-	// labyrinthe exemple utilisé en attendant de relier a la classe Labyrinthe
+	// labyrinthe exemple utilisÃ© en attendant de relier a la classe Labyrinthe
 	public int[][] labyrinthe = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 0, 0, 1, 0, 0, 0, 0, 0, 1},
@@ -99,7 +100,7 @@ public class LabyrintheGameGUI {
     		labyrinthePanel.repaint();
     	}
     }
-    //tt les cas dans lequel le héros peut avancer
+    //tt les cas dans lequel le hÃ©ros peut avancer
     private boolean isValidMove(int newX, int newY) {
     	return newX>=0 && newX<labyrinthe[0].length 
     			&& newY>=0 && newY<labyrinthe.length 
@@ -110,10 +111,10 @@ public class LabyrintheGameGUI {
 class LabyrinthePanel extends JPanel {
 	private int heroX=1;
 	private int heroY=1;
-	//initialise mon héros a la case 1,1
-	//position à prendre de guillian après pour avoir sa vrai position 
+	//initialise mon hÃ©ros a la case 1,1
+	//position Ã  prendre de guillian aprÃ¨s pour avoir sa vrai position 
 	
-    //ref à l'instance parente sinon ca ne marchait plus  
+    //ref Ã  l'instance parente sinon ca ne marchait plus  
     private LabyrintheGameGUI parent; 
     private BufferedImage Brique;
     private BufferedImage Heros;
@@ -136,15 +137,15 @@ class LabyrinthePanel extends JPanel {
 	}
     
     
-    //ajout constructeur avec la ref à l'instance
+    //ajout constructeur avec la ref Ã  l'instance
     public LabyrinthePanel(LabyrintheGameGUI parent) {
     	this.parent=parent;
     	setFocusable(true);
     	
         try {
-            Brique = ImageIO.read(new File("\Users\saussard2u\ACL_2023_Totally_Spies\Code\Interface_graphique\src\Brique.png")); 
-            Heros = ImageIO.read(new File("\Users\saussard2u\ACL_2023_Totally_Spies\Code\Interface_graphique\src\Heros.png"));
-            Herbe = ImageIO.read(new File("\Users\saussard2u\ACL_2023_Totally_Spies\Code\Interface_graphique\src\Herbe.png"));
+            Brique = ImageIO.read(new File("C:\\Users\\Guillian\\ACL_2023_Totally_Spies\\Code\\Personnage\\src\\projet_totally_spies\\Brique.png")); 
+            Heros = ImageIO.read(new File("C:\\Users\\Guillian\\ACL_2023_Totally_Spies\\Code\\Personnage\\src\\projet_totally_spies\\Heros.png"));
+            Herbe = ImageIO.read(new File("C:\\Users\\Guillian\\ACL_2023_Totally_Spies\\Code\\Personnage\\src\\projet_totally_spies\\Herbe.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
