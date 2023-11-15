@@ -9,6 +9,8 @@ public class main_Attaque {
 		int pv_mon=150;
 		int pv_hero=150;
 		int plein=1;
+		int finfin=0;
+		
 		Personnage monstre= new Personnage(pv_mon,10,3,9,2);
 		Personnage hero= new Personnage(pv_hero,20,10,19,9);
 		Objet_spe potion=new Objet_spe(plein,3,4);
@@ -19,20 +21,23 @@ public class main_Attaque {
 		Attaque a=new Attaque(monstre, hero);
 		Special s=new Special(hero,potion,trou,pic,fin);
 		
-		//System.out.println(a.contact());
-		//a.attaque_contact(hero,monstre);
-		a.attaque_epe_contact(hero, monstre);
-		s.Potion(hero,potion);
-		s.Trou(hero,trou);
-		s.Pic(hero, pic);
-		a.attaque_epe(hero, monstre);
-		a.attaque_contact(hero, monstre);
-		System.out.println(hero);//marche
+
+		finfin = s.Fin(hero, fin);
+		/*System.out.println(hero);//marche
 		System.out.println(monstre);//marche
 		System.out.println(potion);
 		System.out.println(pic);
-		System.out.println(trou);
-		
+		System.out.println(trou);*/
+		while(finfin!=1) {
+
+			s.Potion(hero,potion);
+			s.Trou(hero,trou);
+			s.Pic(hero, pic);
+			a.attaque_epe(hero, monstre);
+			a.attaque_epe_contact(hero, monstre);
+			a.attaque_contact(hero, monstre);
+			
+		}
 		SwingUtilities.invokeLater(() -> {
 			int niveau=1;
 			LabyrintheGameGUI labyrinthe = new LabyrintheGameGUI(niveau);
