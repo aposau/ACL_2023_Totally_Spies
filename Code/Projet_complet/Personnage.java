@@ -1,4 +1,4 @@
-package projet_totally_spies;
+package proj_Ro;
 
 public class Personnage {
 	int nb_PV;
@@ -7,6 +7,7 @@ public class Personnage {
 	int positionY;
 	int ant_positionY;
 	int[][] tableau;
+	
 	public Personnage(int nb_PV ,int positionX,int positionY,int ant_positionX,int ant_positionY) {
 		this.positionX=positionX;
 		this.positionY=positionY;
@@ -48,12 +49,15 @@ public class Personnage {
 	public void setAnt_positionY(int ant_positionY) {
 		this.ant_positionY = ant_positionY;
 	}
+    public String toString() {
+        return "Personnage [PV=" + nb_PV + ", position X=" + positionX + ", Position Y=" + positionY + "]";
+    }
 	public void move_up() {
 		
 		int a=this.getPositionY();
 		
 		a-=1;
-		this.tableau[this.getAnt_positionX()][this.getAnt_positionY()]=0
+		this.tableau[this.getAnt_positionX()][this.getAnt_positionY()]=0;
 		this.setPositionY(a);
 	}
 	

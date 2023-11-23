@@ -32,4 +32,5 @@ public class Objet_spe {
 	    public String toString() {
 	        return "Objet spe [plein=" + plein + ", position X=" + positionX + ", Position Y=" + positionY + "]";
 	    }
+
 }

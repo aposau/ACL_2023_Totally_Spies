@@ -1,12 +1,17 @@
-package projet_totally_spies;
+package proj_Ro;
 import javax.swing.*;
-public class Main_Interface {
 
+ 
+public class main_Attaque {
+
+	
 	public static void main(String[] args) {
+
 		SwingUtilities.invokeLater(() -> {
 			int niveau=1;
 			LabyrintheGameGUI labyrinthe = new LabyrintheGameGUI(niveau);
 			labyrinthe.createAndShowGUI();
-		});
+	        });
+
 	}
 }

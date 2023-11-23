@@ -1,5 +1,4 @@
 package proj_Ro;
-import java.util.Scanner;
 
 
 
@@ -10,25 +9,21 @@ public class Attaque {
 
 	int X_hero;
 	int Y_hero;
+	
+	int epe;
 
-	public Attaque ( Personnage monmon, Personnage charles) {
+	public Attaque ( Personnage monmon, Personnage charles,LabyrintheGameGUI labyby) {
 		this.X_mon= monmon.getPositionX();
 		this.Y_mon= monmon.getPositionY();
 
 		this.X_hero= charles.getPositionX();
 		this.Y_hero= charles.getPositionY();
+		
+		this.epe=labyby.getP();
 
     }
 	 public int detecter_entrer() {
-	        Scanner scanner = new Scanner(System.in);
-	        int p=0;
-	            String input = scanner.nextLine();
-	            if (input.equals("")) {
-	                // Code à exécuter lorsque la touche "Entrée" est pressée en mode console
-	                //System.out.println("Bim");
-	                p=1;
-	            }
-	        return(p);
+	        return(this.epe);
 	 }
 	        
 	public int perte_de_pv(int pv) {
@@ -59,7 +54,6 @@ public class Attaque {
 
 	public void attaque_epe_contact(Personnage hero, Personnage monstre) {
 		int touche=contact();
-		int epe=detecter_entrer();
 		if (touche==1){
 			if (epe==1) {
 				int pv_hero=hero.getNb_PV();
@@ -71,7 +65,6 @@ public class Attaque {
 		}
 	}
 	
-
 	public int cout_epe() {
 		int p=0;
 		if (this.X_mon+1==this.X_hero) {
@@ -109,9 +102,8 @@ public class Attaque {
 	
 	public void attaque_epe(Personnage hero, Personnage monstre) {
 		int cout=cout_epe();
-		int epe=detecter_entrer();
 		if (cout==1){
-			if (epe==1) {
+			if (this.epe==1) {
 				int pv_monstre=monstre.getNb_PV();
 				monstre.setNb_PV(pv_monstre-50);
                 System.out.println("Bim");
