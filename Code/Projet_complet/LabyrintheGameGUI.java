@@ -18,17 +18,17 @@ public class LabyrintheGameGUI {
 	int nv=1;
 
 
-	Personnage monstre= new Personnage(pv_mon,10,11,9,10);
-	Personnage hero= new Personnage(pv_hero,10,10,9,9);
+	Personnage monstre= new Personnage(pv_mon,4,4,1,1);
+	Personnage hero= new Personnage(pv_hero,2,2,9,9);
 	Objet_spe potion=new Objet_spe(plein,3,4);
 	Objet_spe trou=new Objet_spe(plein,15,4);
 	Objet_spe pic=new Objet_spe(plein,20,10);
 	Objet_spe fin=new Objet_spe(plein,40,10);
-	LabyrintheGameGUI epe = new LabyrintheGameGUI(nv);
 
 
 
-	Attaque a=new Attaque(monstre, hero,epe);
+
+
 	Special s=new Special(hero,potion,trou,pic,fin);
 	int finfin = s.Fin(hero, fin);
 
@@ -62,7 +62,7 @@ public class LabyrintheGameGUI {
 		frame.setSize(800, 800);
 
 
-		LabyrinthePanel labyrinthePanel = new LabyrinthePanel(this);
+		LabyrinthePanel labyrinthePanel = new LabyrinthePanel(this,hero);
 		frame.add(labyrinthePanel);
 		labyrinthePanel.setVisible(true);
 
@@ -75,6 +75,7 @@ public class LabyrintheGameGUI {
 			public void keyPressed(KeyEvent e) {
 				moveHero(e.getKeyCode());
 				System.out.println("Key pressed: " + e.getKeyCode());
+				System.out.println(hero);
 			}
 
 			@Override
@@ -93,7 +94,15 @@ public class LabyrintheGameGUI {
 	        int p=1;
 	        return(p);
 	 }
-
+		public int contact () {
+			int p =0;
+			if (monstre.getPositionX() == hero.getPositionY()) {
+				if (monstre.getPositionY() == hero.getPositionX()) {
+					p = 1;
+				}
+			}
+			return(p);
+		}
 	private void moveHero(int keyCode) {
 		int dx=0;
 		int dy=0;
@@ -122,9 +131,38 @@ public class LabyrintheGameGUI {
 			break;
 		}
 		
+		Attaque a=new Attaque(monstre,hero);
+			int touche=a.contact();
+			if (touche==1){
+				if (getP() ==1) {
+					int pv_hero=hero.getNb_PV();
+					int pv_monstre=monstre.getNb_PV();
+					hero.setNb_PV(pv_hero-20);
+					monstre.setNb_PV(pv_monstre-50);
+	                System.out.println("Bam");
+				}
+			}
+			
+			int cout=a.cout_epe();
+			if (cout==1){
+				if (getP()==1) {
+					int pv_monstre=monstre.getNb_PV();
+					monstre.setNb_PV(pv_monstre-50);
+	                System.out.println("Bim");
+				}
+			}
+		
+		
 
 		LabyrinthePanel labyrinthePanel= (LabyrinthePanel) frame.getContentPane().getComponent(0);
+		/*
+		if (isValidMove(hero.getPositionX()+dx,hero.getPositionY()+dy)) {
+			hero.setPositionX(hero.getPositionX()+ dx);
+			hero.setPositionY(hero.getPositionY()+ dy);
 
+			labyrinthePanel.repaint();
+		}
+	}*/
 		if (isValidMove(labyrinthePanel.getHeroX()+dx,labyrinthePanel.getHeroY()+dy)) {
 			labyrinthePanel.setHeroX(labyrinthePanel.getHeroX() + dx);
 			labyrinthePanel.setHeroY(labyrinthePanel.getHeroY() + dy);
@@ -140,6 +178,7 @@ public class LabyrintheGameGUI {
 }
 
 class LabyrinthePanel extends JPanel {
+	
 	private int heroX=1;
 	private int heroY=1;
 	//initialise mon héros a la case 1,1
@@ -169,9 +208,13 @@ class LabyrinthePanel extends JPanel {
 
 
 	//ajout constructeur avec la ref à l'instance
-	public LabyrinthePanel(LabyrintheGameGUI parent) {
+	public LabyrinthePanel(LabyrintheGameGUI parent,Personnage hero) {
 		this.parent=parent;
 		setFocusable(true);
+		System.out.println(hero);
+		this.heroX=hero.getPositionX();
+		this.heroY=hero.getPositionY();
+		
 
 		try {
 			Brique = ImageIO.read(new File("C:\\\\Users\\\\r0man\\\\OneDrive\\\\Documents\\\\Ensem\\\\2A\\\\Info\\javoute\\Projet\\Brique.png")); 
