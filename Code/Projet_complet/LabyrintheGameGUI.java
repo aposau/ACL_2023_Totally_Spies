@@ -1,4 +1,4 @@
-package proj_Ro;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -220,6 +220,10 @@ class LabyrinthePanel extends JPanel {
 			Brique = ImageIO.read(new File("C:\\\\Users\\\\r0man\\\\OneDrive\\\\Documents\\\\Ensem\\\\2A\\\\Info\\javoute\\Projet\\Brique.png")); 
 			Heros = ImageIO.read(new File("C:\\\\Users\\\\r0man\\\\OneDrive\\\\Documents\\\\Ensem\\\\2A\\\\Info\\\\javoute\\\\Projet\\\\Heros.png"));
 			Herbe = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Herbe.png"));
+			Pic = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Pic.png"));
+			Potion = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Potion.png"));
+			Trou = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Trou.png"));
+			Fin = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Fin.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -232,9 +236,21 @@ class LabyrinthePanel extends JPanel {
 		int cellSize = 50; // taille d'une cellule en pixels
 		for (int i = 0; i < parent.labyrinthe.length; i++) {
 			for (int j = 0; j < parent.labyrinthe[i].length; j++) {
-				if (parent.labyrinthe[i][j] == 1 || parent.labyrinthe[i][j] == 4) {
+				if (parent.labyrinthe[i][j] == 1) {
 					g.drawImage(Brique, j * cellSize, i * cellSize, cellSize, cellSize, null);
 				} 
+				else if (parent.labyrinthe[i][j] == 2) {
+					g.drawImage(Pic, j * cellSize, i * cellSize, cellSize, cellSize, null);
+				}
+				else if (parent.labyrinthe[i][j] == 3) {
+					g.drawImage(Potion, j * cellSize, i * cellSize, cellSize, cellSize, null);
+				}
+				else if (parent.labyrinthe[i][j] == 4) {
+					g.drawImage(Trou, j * cellSize, i * cellSize, cellSize, cellSize, null);
+				}
+				else if (parent.labyrinthe[i][j] == 5) {
+					g.drawImage(Fin, j * cellSize, i * cellSize, cellSize, cellSize, null);
+				}
 				else if (i == getHeroY() && j == getHeroX()) {
 					g.drawImage(Heros, j * cellSize, i * cellSize, cellSize, cellSize, null);
 				}
