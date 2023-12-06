@@ -1,11 +1,19 @@
 package projet_totally_spies;
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class Fantome extends Monstre {
 	public Fantome(int nb_PV ,int positionX,int positionY, int matricule) {
 		super(nb_PV ,positionX,positionY, matricule);
 	}
+	
+	@Override
+	public String toString() {
+		return "Fantome [matricule=" + matricule + ", nb_PV=" + nb_PV + ", positionX=" + positionX + ", positionY="
+				+ positionY + "]";
+	}
+
 	public void deplacement_random_mur() {
 		while ( this.nb_PV!=0 ) { // 
 			Random r = new Random();
