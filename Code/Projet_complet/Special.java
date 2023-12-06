@@ -47,9 +47,13 @@ public class Special {
 	}
 	public void Pic(Personnage charles,Objet_spe pic) {
 		if (this.X_pic == this.X_hero) {
-			if (this.Y_pic == this.Y_hero) {
+			if (this.Y_pic == this.Y_hero && charles.getNb_PV()>=100) {
 				int pv_hero=charles.getNb_PV();
 				charles.setNb_PV(pv_hero-100);
+				pic.setPlein(0);
+			}
+			else {
+				charles.setNb_PV(0);
 				pic.setPlein(0);
 			}
 		}
@@ -71,4 +75,9 @@ public class Special {
 		}
 		return(p);
 	} 
+	public void Mort(Personnage charles) {
+		 if (charles.getNb_PV()==0) {
+			 System.out.println("Vous êtes mort !!!");
+		 }
+	}
 }
