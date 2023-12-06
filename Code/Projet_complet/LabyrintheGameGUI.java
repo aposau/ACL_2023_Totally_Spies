@@ -1,4 +1,4 @@
-
+package proj_Ro;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +10,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class LabyrintheGameGUI {
-	
+
 	int p;
-	int pv_mon=150;
+	int pv_mon=80;
 	int pv_hero=150;
 	int plein=1;
 	int nv=1;
@@ -25,8 +25,7 @@ public class LabyrintheGameGUI {
 	Objet_spe pic=new Objet_spe(plein,20,10);
 	Objet_spe fin=new Objet_spe(plein,40,10);
 
-	Special s=new Special(hero,potion,trou,pic,fin);
-	int finfin = s.Fin(hero, fin);
+
 
 	private JFrame frame;
 
@@ -36,7 +35,7 @@ public class LabyrintheGameGUI {
 		this.p=0;
 		chargerLabyrinthe(nv);
 	}
-	
+
 	public int getP() {
 		return p;
 	}
@@ -69,7 +68,10 @@ public class LabyrintheGameGUI {
 			public void keyPressed(KeyEvent e) {
 				moveHero(e.getKeyCode());
 				System.out.println("Key pressed: " + e.getKeyCode());
+				System.out.println("Hero:");
 				System.out.println(hero);
+				System.out.println("Monstre");
+				System.out.println(monstre);
 			}
 
 			@Override
@@ -84,19 +86,19 @@ public class LabyrintheGameGUI {
 		// rend le JFrame visible
 		frame.setVisible(true);
 	}
-	 public int detecter_entrer() {
-	        int p=1;
-	        return(p);
-	 }
-		public int contact () {
-			int p =0;
-			if (monstre.getPositionX() == hero.getPositionY()) {
-				if (monstre.getPositionY() == hero.getPositionX()) {
-					p = 1;
-				}
+	public int detecter_entrer() {
+		int p=1;
+		return(p);
+	}
+	public int contact () {
+		int p =0;
+		if (monstre.getPositionX() == hero.getPositionY()) {
+			if (monstre.getPositionY() == hero.getPositionX()) {
+				p = 1;
 			}
-			return(p);
 		}
+		return(p);
+	}
 	private void moveHero(int keyCode) {
 		int dx=0;
 		int dy=0;
@@ -124,33 +126,66 @@ public class LabyrintheGameGUI {
 			System.out.println("proute");
 			break;
 		}
-		
+
 		//private void move_monstre() {
-			
+
 		//}
-		
+
 		Attaque a=new Attaque(monstre,hero);
-			int touche=a.contact();
-			if (touche==1){
-				if (getP() ==1) {
+		Special s =new Special(hero,potion,trou,pic,fin);
+		
+		int touche=contact();
+		if (touche==1){
+			if (getP()==1) {
+				if (monstre.getNb_PV()>=30 && hero.getNb_PV()>=20) {
 					int pv_hero=hero.getNb_PV();
 					int pv_monstre=monstre.getNb_PV();
 					hero.setNb_PV(pv_hero-20);
-					monstre.setNb_PV(pv_monstre-50);
-	                System.out.println("Bam");
+					monstre.setNb_PV(pv_monstre-30);
+					System.out.println("Bam");
 				}
-			}
-			
-			int cout=a.cout_epe();
-			if (cout==1){
-				if (getP()==1) {
+				else if(monstre.getNb_PV()<30){
+					int pv_hero=hero.getNb_PV();
+
+					hero.setNb_PV(pv_hero-20);
+					monstre.setNb_PV(0);
+					System.out.println("Bam");
+
+				}
+				else if(hero.getNb_PV()<20){
 					int pv_monstre=monstre.getNb_PV();
-					monstre.setNb_PV(pv_monstre-50);
-	                System.out.println("Bim");
+					hero.setNb_PV(0);
+					monstre.setNb_PV(pv_monstre-30);
+					System.out.println("Bam");
 				}
 			}
+		}
 		
+		a.attaque_contact(hero, monstre);
+		s.Trou(hero, trou);
+		s.Pic(hero, pic);
+		s.Potion(hero, fin);
+		s.Fin(hero, fin);
 		
+
+		int cout=a.cout_epe();
+		if (cout==1){
+			if (getP()==1) {
+				if (monstre.getNb_PV()>30){
+					int pv_monstre=monstre.getNb_PV();
+					monstre.setNb_PV(pv_monstre-30);
+					System.out.println("Bim");
+				}
+				else {
+					System.out.println("Le monstre est mort !");
+					monstre.setNb_PV(0);
+					System.out.println("Bim");
+
+				}
+			}
+		}
+
+
 
 		LabyrinthePanel labyrinthePanel= (LabyrinthePanel) frame.getContentPane().getComponent(0);
 		/*
@@ -176,7 +211,7 @@ public class LabyrintheGameGUI {
 }
 
 class LabyrinthePanel extends JPanel {
-	
+
 	private int heroX;
 	private int heroY;
 	private int monstreX;
@@ -210,7 +245,7 @@ class LabyrinthePanel extends JPanel {
 	public void setHeroY(int heroY) {
 		this.heroY = heroY;
 	}
-	
+
 	public int getMonstreX() {
 		return monstreX;
 	}
@@ -237,62 +272,61 @@ class LabyrinthePanel extends JPanel {
 		this.heroY=hero.getPositionY();
 		this.monstreX=monstre.getPositionX();
 		this.monstreY=monstre.getPositionY();
-		
+
 
 		try {
-			Brique = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Brique.png")); 
-			Heros = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Heros.png"));
-			Herbe = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Herbe.png"));
-			Pic = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Pic.png"));
-			Potion = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Potion.png"));
-			Trou = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Trou.png"));
-			Fin = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Fin.png"));
-			Monstre = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Monstre.png"));
+			Brique = ImageIO.read(new File("C:\\\\Users\\\\r0man\\\\OneDrive\\\\Documents\\\\Ensem\\\\2A\\\\Info\\javoute\\Projet\\Brique.png")); 
+			Heros = ImageIO.read(new File("C:\\\\Users\\\\r0man\\\\OneDrive\\\\Documents\\\\Ensem\\\\2A\\\\Info\\\\javoute\\\\Projet\\\\Heros.png"));
+			Herbe = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Herbe.png"));
+			Pic = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Pic.png"));
+			Potion = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Potion.png"));
+			Trou = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Trou.png"));
+			Fin = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Fin.png"));
+			Monstre = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Monstre.png"));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
 
-	@Override //c'est pour lui dire qu'on remplace la methode qui est dans JPanel
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		int cellSize = 50; // taille d'une cellule en pixels
-		for (int i = 0; i < parent.labyrinthe.length; i++) {
-			for (int j = 0; j < parent.labyrinthe[i].length; j++) {
-				if (parent.labyrinthe[i][j] == 1) {
-					g.drawImage(Brique, j * cellSize, i * cellSize, cellSize, cellSize, null);
-				} 
-				else if (parent.labyrinthe[i][j] == 2) {
-					g.drawImage(Pic, j * cellSize, i * cellSize, cellSize, cellSize, null);
-				}
-				else if (parent.labyrinthe[i][j] == 3) {
-					g.drawImage(Potion, j * cellSize, i * cellSize, cellSize, cellSize, null);
-				}
-				else if (parent.labyrinthe[i][j] == 4) {
-					g.drawImage(Trou, j * cellSize, i * cellSize, cellSize, cellSize, null);
-				}
-				else if (parent.labyrinthe[i][j] == 5) {
-					g.drawImage(Fin, j * cellSize, i * cellSize, cellSize, cellSize, null);
-				}
-				else if (i == getHeroY() && j == getHeroX()) {
-					g.drawImage(Heros, j * cellSize, i * cellSize, cellSize, cellSize, null);
-				}
-				else if (i == getMonstreY() && j == getMonstreX()) {
-					g.drawImage(Monstre, j * cellSize, i * cellSize, cellSize, cellSize, null);
-				}
-				else {
-					g.drawImage(Herbe, j * cellSize, i * cellSize, cellSize, cellSize, null);
-				}
 
-				// dessine une bordure autour de la cellule pour mieux voir
-				g.setColor(Color.GRAY);
-				g.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
+@Override //c'est pour lui dire qu'on remplace la methode qui est dans JPanel
+protected void paintComponent(Graphics g) {
+	super.paintComponent(g);
+	int cellSize = 50; // taille d'une cellule en pixels
+	for (int i = 0; i < parent.labyrinthe.length; i++) {
+		for (int j = 0; j < parent.labyrinthe[i].length; j++) {
+			if (parent.labyrinthe[i][j] == 1) {
+				g.drawImage(Brique, j * cellSize, i * cellSize, cellSize, cellSize, null);
+			} 
+			else if (parent.labyrinthe[i][j] == 2) {
+				g.drawImage(Pic, j * cellSize, i * cellSize, cellSize, cellSize, null);
 			}
-		}
+			else if (parent.labyrinthe[i][j] == 3) {
+				g.drawImage(Potion, j * cellSize, i * cellSize, cellSize, cellSize, null);
+			}
+			else if (parent.labyrinthe[i][j] == 4) {
+				g.drawImage(Trou, j * cellSize, i * cellSize, cellSize, cellSize, null);
+			}
+			else if (parent.labyrinthe[i][j] == 5) {
+				g.drawImage(Fin, j * cellSize, i * cellSize, cellSize, cellSize, null);
+			}
+			else if (i == getHeroY() && j == getHeroX()) {
+				g.drawImage(Heros, j * cellSize, i * cellSize, cellSize, cellSize, null);
+			}
+			else if (i == getMonstreY() && j == getMonstreX()) {
+				g.drawImage(Monstre, j * cellSize, i * cellSize, cellSize, cellSize, null);
+			}
+			else {
+				g.drawImage(Herbe, j * cellSize, i * cellSize, cellSize, cellSize, null);
+			}
 
+			// dessine une bordure autour de la cellule pour mieux voir
+			g.setColor(Color.GRAY);
+			g.drawRect(j * cellSize, i * cellSize, cellSize, cellSize);
+		}
 	}
 
 }
-
-
+}
