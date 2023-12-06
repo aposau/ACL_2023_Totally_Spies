@@ -3,12 +3,10 @@ package projet_totally_spies;
 import java.util.Random;
 
 public class Fantome extends Monstre {
-	public Fantome(int nb_PV ,int positionX,int positionY, int ant_positionX, int ant_positionY,int matricule) {
-		super(nb_PV ,positionX,positionY,ant_positionX, ant_positionY, matricule);
+	public Fantome(int nb_PV ,int positionX,int positionY, int matricule) {
+		super(nb_PV ,positionX,positionY, matricule);
 	}
 	public void deplacement_random_mur() {
-		this.ant_positionX = this.positionX ;
-		this.ant_positionY = this.positionY ;
 		while ( this.nb_PV!=0 ) { // 
 			Random r = new Random();
 			int direction = r.nextInt(4);

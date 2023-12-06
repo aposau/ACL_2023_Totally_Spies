@@ -3,8 +3,8 @@ package projet_totally_spies;
 
 public class Heros extends Personnage  {
 	
-	public Heros(int nb_PV ,int positionX,int positionY ,int ant_positionX,int ant_positionY) {
-		super( nb_PV , positionX,positionY ,ant_positionX, ant_positionY);
+	public Heros(int nb_PV ,int positionX,int positionY ) {
+		super( nb_PV , positionX,positionY );
 		this.nb_PV= 150;
 	}
 /*
