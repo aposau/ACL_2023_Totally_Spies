@@ -18,23 +18,17 @@ public class LabyrintheGameGUI {
 	int nv=1;
 
 
-	Personnage monstre= new Personnage(pv_mon,4,4,1,1);
+	Personnage monstre= new Personnage(pv_mon,3,3,1,1);
 	Personnage hero= new Personnage(pv_hero,2,2,9,9);
 	Objet_spe potion=new Objet_spe(plein,3,4);
 	Objet_spe trou=new Objet_spe(plein,15,4);
 	Objet_spe pic=new Objet_spe(plein,20,10);
 	Objet_spe fin=new Objet_spe(plein,40,10);
 
-
-
-
-
 	Special s=new Special(hero,potion,trou,pic,fin);
 	int finfin = s.Fin(hero, fin);
 
 	private JFrame frame;
-
-
 
 	public int [][] labyrinthe;
 
@@ -62,7 +56,7 @@ public class LabyrintheGameGUI {
 		frame.setSize(800, 800);
 
 
-		LabyrinthePanel labyrinthePanel = new LabyrinthePanel(this,hero);
+		LabyrinthePanel labyrinthePanel = new LabyrinthePanel(this,hero,monstre);
 		frame.add(labyrinthePanel);
 		labyrinthePanel.setVisible(true);
 
@@ -131,6 +125,10 @@ public class LabyrintheGameGUI {
 			break;
 		}
 		
+		//private void move_monstre() {
+			
+		//}
+		
 		Attaque a=new Attaque(monstre,hero);
 			int touche=a.contact();
 			if (touche==1){
@@ -179,8 +177,10 @@ public class LabyrintheGameGUI {
 
 class LabyrinthePanel extends JPanel {
 	
-	private int heroX=1;
-	private int heroY=1;
+	private int heroX;
+	private int heroY;
+	private int monstreX;
+	private int monstreY;
 	//initialise mon héros a la case 1,1
 	//position à prendre de guillian après pour avoir sa vrai position 
 
@@ -189,6 +189,11 @@ class LabyrinthePanel extends JPanel {
 	private BufferedImage Brique;
 	private BufferedImage Heros;
 	private BufferedImage Herbe;
+	private BufferedImage Trou;
+	private BufferedImage Pic;
+	private BufferedImage Fin;
+	private BufferedImage Potion;
+	private BufferedImage Monstre;
 
 	public int getHeroX() {
 		return heroX;
@@ -205,25 +210,44 @@ class LabyrinthePanel extends JPanel {
 	public void setHeroY(int heroY) {
 		this.heroY = heroY;
 	}
+	
+	public int getMonstreX() {
+		return monstreX;
+	}
+
+	public void setMonstreX(int monstreX) {
+		this.monstreX = monstreX;
+	}
+
+	public int getMonstreY() {
+		return monstreY;
+	}
+
+	public void setMonstreY(int monstreY) {
+		this.monstreY = monstreY;
+	}
 
 
 	//ajout constructeur avec la ref à l'instance
-	public LabyrinthePanel(LabyrintheGameGUI parent,Personnage hero) {
+	public LabyrinthePanel(LabyrintheGameGUI parent,Personnage hero,Personnage monstre) {
 		this.parent=parent;
 		setFocusable(true);
 		System.out.println(hero);
 		this.heroX=hero.getPositionX();
 		this.heroY=hero.getPositionY();
+		this.monstreX=monstre.getPositionX();
+		this.monstreY=monstre.getPositionY();
 		
 
 		try {
-			Brique = ImageIO.read(new File("C:\\\\Users\\\\r0man\\\\OneDrive\\\\Documents\\\\Ensem\\\\2A\\\\Info\\javoute\\Projet\\Brique.png")); 
-			Heros = ImageIO.read(new File("C:\\\\Users\\\\r0man\\\\OneDrive\\\\Documents\\\\Ensem\\\\2A\\\\Info\\\\javoute\\\\Projet\\\\Heros.png"));
-			Herbe = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Herbe.png"));
-			Pic = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Pic.png"));
-			Potion = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Potion.png"));
-			Trou = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Trou.png"));
-			Fin = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Fin.png"));
+			Brique = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Brique.png")); 
+			Heros = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Heros.png"));
+			Herbe = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Herbe.png"));
+			Pic = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Pic.png"));
+			Potion = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Potion.png"));
+			Trou = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Trou.png"));
+			Fin = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Fin.png"));
+			Monstre = ImageIO.read(new File("/Users/apollinesaussard/eclipse-workspace/projet_jeu/Proj/Monstre.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -253,6 +277,9 @@ class LabyrinthePanel extends JPanel {
 				}
 				else if (i == getHeroY() && j == getHeroX()) {
 					g.drawImage(Heros, j * cellSize, i * cellSize, cellSize, cellSize, null);
+				}
+				else if (i == getMonstreY() && j == getMonstreX()) {
+					g.drawImage(Monstre, j * cellSize, i * cellSize, cellSize, cellSize, null);
 				}
 				else {
 					g.drawImage(Herbe, j * cellSize, i * cellSize, cellSize, cellSize, null);
