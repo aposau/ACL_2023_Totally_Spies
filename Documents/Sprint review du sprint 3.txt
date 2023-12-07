@@ -1,0 +1,9 @@
+Sprint review du sprint 3 : 
+
+Les fonctionnalitées que nous avons réalisées : 
+- Main commun à toutes les classes. 
+- Le labyrinthe affiche les objets spécciaux ainsi que le monstre. 
+- L'utilisateur peut choisir le niveau de labyrinthe qu'il veut jouer. 
+- Les monstres se déplacent de maniere aléatoire dans les classes Monstre_normal et Fantomes. 
+- Réalisation de test Junit (verifier que le heros ne peut pas aller sur des briques ou en dehors du labyrinthe + 
+le héros meurt en cas de contact avec le monstre + le heros ne peut pas avoir de PV négatifs).  

@@ -1,0 +1,3 @@
+Sprint rétrospective du sprint 3 :
+
+Nous avons eu du mal à relier nos classes entre elles dans un main commun. La seule manière que nous avons trouvé pour lier toutes les classes entre elles a été d'ajouter certains morceaux de classes directement dans la classe LabyrintheGameGUI. Nous avons aussi eu quelques problèmes au niveau de la liaison entre le déplacement du monstre dans Monstre_normal et le labyrinthe. Nous avons donc décider de nous occuper du déplacements des monstres dans le sprint 4. Nous avons également réussi à faire des test Junit pour le sprint 3, dont certains nous on permis de rectifier certains fonctions de nos classes (par exemple, le fait que le heros ne pouvait pas avoir de PV négatifs étaient mal codés sur une des attaques). 

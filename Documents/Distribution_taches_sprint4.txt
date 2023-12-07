@@ -1,0 +1,6 @@
+Taches du sprint 4 :
+
+- relier la position des objets speciaux dans le labyrinthe à la classe objets speciaux pour que le heros puissent interragir avec les objets -> Thomas et Romane 
+- fermer la fenêtre du jeu lorsque le héros meurt ou lorsqu'il gagne (arrive à la case de Fin) et si possible afficher une fenetre à message -> Apolline 
+- faire bouger les monstres sur le labyrinthe -> Guillian et Apolline 
+- realiser une partie jouable du debut a la fin -> tout le monde 
