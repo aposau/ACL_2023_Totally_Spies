@@ -1,6 +1,5 @@
 package projet_totally_spies;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Fantome extends Monstre {
@@ -15,7 +14,6 @@ public class Fantome extends Monstre {
 	}
 
 	public void deplacement_random_mur() {
-		while ( this.nb_PV!=0 ) { // 
 			Random r = new Random();
 			int direction = r.nextInt(4);
 			if (direction==0) { //haut
@@ -40,5 +38,5 @@ public class Fantome extends Monstre {
 			}
 		}
 
-	}
+	
 }
