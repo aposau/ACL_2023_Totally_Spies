@@ -1,4 +1,4 @@
-package proj_Ro;
+package projproj;
 
 
 
@@ -59,7 +59,7 @@ public class Attaque {
 					monstre.setNb_PV(pv_monstre-30);
 					System.out.println("Bam");
 				}
-				else if(monstre.getNb_PV()<30){
+				else if(monstre.getNb_PV()<30 && hero.getNb_PV()>=20){
 					int pv_hero=hero.getNb_PV();
 
 					hero.setNb_PV(pv_hero-20);
@@ -67,11 +67,16 @@ public class Attaque {
 					System.out.println("Bam");
 
 				}
-				else if(hero.getNb_PV()<20){
+				else if(hero.getNb_PV()<20 && monstre.getNb_PV()>=30){
 					int pv_monstre=monstre.getNb_PV();
 					hero.setNb_PV(0);
 					monstre.setNb_PV(pv_monstre-30);
 					System.out.println("Bam");
+				}
+				else {
+					monstre.setNb_PV(0);
+					hero.setNb_PV(0);
+					System.out.println("2 morts");
 				}
 			}
 		}
