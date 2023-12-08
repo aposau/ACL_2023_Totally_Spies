@@ -19,6 +19,7 @@ public class LabyrintheGameGUI {
 
 	Personnage monstre= new Personnage(pv_mon,3,3);
 	Monstre_normal monmon=new Monstre_normal(pv_mon,2,5,1);
+	Fantome fonfon = new Fantome(pv_mon,10,12,2);
 	Personnage hero= new Personnage(pv_hero,2,2);
 	Objet_spe potion=new Objet_spe(plein,5,4);
 	Objet_spe trou=new Objet_spe(plein,15,4);
@@ -54,7 +55,7 @@ public class LabyrintheGameGUI {
 		frame.setSize(800, 800);
 
 
-		LabyrinthePanel labyrinthePanel = new LabyrinthePanel(this,hero,monmon);
+		LabyrinthePanel labyrinthePanel = new LabyrinthePanel(this,hero,monmon,fonfon);
 		frame.add(labyrinthePanel);
 		labyrinthePanel.setVisible(true);
 
@@ -127,13 +128,13 @@ public class LabyrintheGameGUI {
 		//}
 		
 		Attaque a=new Attaque(monmon,hero);
+		Attaque a2=new Attaque(fonfon,hero);
 		Special s=new Special(hero,potion,trou,pic,fin);
 		
 		
 		int touche=a.contact();
-		int epe=1;
 		if (touche==1){
-			if (epe==1) {
+			if (getP()==1) {
 				if (monmon.getNb_PV()>=30 && hero.getNb_PV()>=20) {
 					int pv_hero=hero.getNb_PV();
 					int pv_monstre=monmon.getNb_PV();
@@ -162,9 +163,41 @@ public class LabyrintheGameGUI {
 				}
 			}
 		}
+		int touche2=a2.contact();
+		if (touche2==1){
+			if (getP()==1) {
+				if (fonfon.getNb_PV()>=30 && hero.getNb_PV()>=20) {
+					int pv_hero=hero.getNb_PV();
+					int pv_monstre=fonfon.getNb_PV();
+					hero.setNb_PV(pv_hero-20);
+					fonfon.setNb_PV(pv_monstre-30);
+					System.out.println("Bam");
+				}
+				else if(fonfon.getNb_PV()<30 && hero.getNb_PV()>=20){
+					int pv_hero=hero.getNb_PV();
+
+					hero.setNb_PV(pv_hero-20);
+					fonfon.setNb_PV(0);
+					System.out.println("Bam");
+
+				}
+				else if(hero.getNb_PV()<20 && fonfon.getNb_PV()>=30){
+					int pv_monstre=fonfon.getNb_PV();
+					hero.setNb_PV(0);
+					fonfon.setNb_PV(pv_monstre-30);
+					System.out.println("Bam");
+				}
+				else {
+					fonfon.setNb_PV(0);
+					hero.setNb_PV(0);
+					System.out.println("2 morts");
+				}
+			}
+		}
 
 			
 			a.attaque_contact(hero, monmon);
+			a2.attaque_contact(hero, fonfon);
 			s.Trou(hero, trou);
 			s.Pic(hero, pic);
 			s.Potion(hero, potion);
@@ -182,6 +215,22 @@ public class LabyrintheGameGUI {
 					else {
 						System.out.println("Le monstre est mort !");
 						monmon.setNb_PV(0);
+						System.out.println("Bim");
+
+					}
+				}
+			}
+			int cout2=a2.cout_epe();
+			if (cout2==1){
+				if (getP()==1) {
+					if (fonfon.getNb_PV()>30){
+						int pv_monstre=fonfon.getNb_PV();
+						fonfon.setNb_PV(pv_monstre-30);
+						System.out.println("Bim");
+					}
+					else {
+						System.out.println("Le monstre est mort !");
+						fonfon.setNb_PV(0);
 						System.out.println("Bim");
 
 					}
@@ -260,20 +309,19 @@ class LabyrinthePanel extends JPanel {
 		return monstreX;
 	}
 
-	public void setMonstreX(int monstreX) {
-		this.monstreX = monstreX;
-	}
-
 	public int getMonstreY() {
 		return monstreY;
 	}
+	public int getFantomeX() {
+		return fonfonX;
+	}
 
-	public void setMonstreY(int monstreY) {
-		this.monstreY = monstreY;
+	public int getFantomeY() {
+		return fonfonY;
 	}
 
 	//ajout constructeur avec la ref à l'instance
-	public LabyrinthePanel(LabyrintheGameGUI parent,Personnage hero,Monstre_normal monmon) {
+	public LabyrinthePanel(LabyrintheGameGUI parent,Personnage hero,Monstre_normal monmon, Fantome fonfon) {
 		this.parent=parent;
 		setFocusable(true);
 		System.out.println(hero);
@@ -281,8 +329,8 @@ class LabyrinthePanel extends JPanel {
 		this.heroY=hero.getPositionY();
 		this.monstreX=monmon.getPositionX();
 		this.monstreY=monmon.getPositionY();
-//		this.fonfonX=
-		
+		this.fonfonX=fonfon.getPositionX();
+		this.fonfonY=fonfon.getPositionY();
 		
 
 		try {
@@ -318,6 +366,9 @@ class LabyrinthePanel extends JPanel {
 				}
 				else if (i == getMonstreY() && j == getMonstreX()) {
 					g.drawImage(Monstre, j * cellSize, i * cellSize, cellSize, cellSize, null);
+				}
+				else if (i == getFantomeY() && j == getFantomeX()) {
+					g.drawImage(Fantome, j * cellSize, i * cellSize, cellSize, cellSize, null);
 				}
 				else if (parent.labyrinthe[i][j] == 2) {
 					g.drawImage(Pic, j * cellSize, i * cellSize, cellSize, cellSize, null);
