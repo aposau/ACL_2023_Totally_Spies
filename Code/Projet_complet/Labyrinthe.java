@@ -1,10 +1,10 @@
-package proj_Ro;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Labyrinthe {
+public class Labyrinthe{
 
 	int nv;
 	public Labyrinthe(int nv) {
@@ -92,5 +92,70 @@ public class Labyrinthe {
 		}
 
 	}
-}
+	public int[][] getPic(){
+		int[][] tableau = lireFichier();
+		int [][] liste = new int [5][2];
+		int num = 0;
+		for (int i=0;i<tableau.length;i++) {
+			for (int j=0;j<tableau[0].length; j++) {
+				if (tableau[i][j]==2) {
+					liste[num][0]=i;
+					liste[num][1]=j;
+					num++;
+				}
+			}
 
+		}
+		return liste;
+
+	}
+	public int[][] getPotion(){
+		int[][] tableau = lireFichier();
+		int [][] liste = new int [2][2];
+		int num = 0;
+		for (int i=0;i<tableau.length;i++) {
+			for (int j=0;j<tableau[0].length; j++) {
+				if (tableau[i][j]==3) {
+					liste[num][0]=i;
+					liste[num][1]=j;
+					num++;
+				}
+			}
+
+		}
+		return liste;
+	}
+	public int[][] getTrou(){
+		int[][] tableau = lireFichier();
+		int [][] liste = new int [4][2];
+		int num = 0;
+		for (int i=0;i<tableau.length;i++) {
+			for (int j=0;j<tableau[0].length; j++) {
+				if (tableau[i][j]==4) {
+					liste[num][0]=i;
+					liste[num][1]=j;
+					num++;
+				}
+			}
+
+		}
+		return liste;
+	}
+	public int[][] getFin(){
+		int[][] tableau = lireFichier();
+		int [][] liste = new int [1][2];
+		int num = 0;
+		for (int i=0;i<tableau.length;i++) {
+			for (int j=0;j<tableau[0].length; j++) {
+				if (tableau[i][j]==5) {
+					liste[num][0]=i;
+					liste[num][1]=j;
+					num++;
+				}
+			}
+
+		}
+		return liste;
+	}
+	
+}
