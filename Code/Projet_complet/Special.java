@@ -39,9 +39,11 @@ public class Special {
 	public void Potion(Personnage charles,Objet_spe popo) {
 		if (this.X_potion == this.X_hero) {
 			if (this.Y_potion == this.Y_hero) {
-				int pv_hero=charles.getNb_PV();
-				charles.setNb_PV(pv_hero+50);
-				popo.setPlein(0);
+				if( popo.getPlein()==1) {
+					int pv_hero=charles.getNb_PV();
+					charles.setNb_PV(pv_hero+50);
+					popo.setPlein(0);
+				}
 			}
 		}
 	}
@@ -50,11 +52,9 @@ public class Special {
 			if (this.Y_pic == this.Y_hero && charles.getNb_PV()>=100) {
 				int pv_hero=charles.getNb_PV();
 				charles.setNb_PV(pv_hero-100);
-				pic.setPlein(0);
 			}
 			else {
 				charles.setNb_PV(0);
-				pic.setPlein(0);
 			}
 		}
 	}
@@ -76,8 +76,8 @@ public class Special {
 		return(p);
 	} 
 	public void Mort(Personnage charles) {
-		 if (charles.getNb_PV()==0) {
-			 System.out.println("Vous êtes mort !!!");
-		 }
+		if (charles.getNb_PV()==0) {
+			System.out.println("Vous êtes mort !!!");
+		}
 	}
 }
