@@ -15,7 +15,8 @@ public class LabyrintheGameGUI {
 	int pv_hero=150;
 	int plein=1;
 	int nv=1;
-	int findumonde=1;
+	int fin_du_monde=0;
+
 
 
 	Personnage monstre= new Personnage(pv_mon,3,3);
@@ -25,7 +26,7 @@ public class LabyrintheGameGUI {
 	Objet_spe potion=new Objet_spe(plein,5,4);
 	Objet_spe trou=new Objet_spe(plein,15,4);
 	Objet_spe pic=new Objet_spe(plein,20,10);
-	Objet_spe fin=new Objet_spe(plein,3,4);
+	Objet_spe fin=new Objet_spe(plein,13,13);
 
 
 	private JFrame frame;
@@ -43,14 +44,14 @@ public class LabyrintheGameGUI {
 	public void setP(int p) {
 		this.p = p;
 	}
+	
 
-
-	public int getFindumonde() {
-		return findumonde;
+	public int getFin_du_monde() {
+		return fin_du_monde;
 	}
 
-	public void setFindumonde(int findumonde) {
-		this.findumonde = findumonde;
+	public void setFin_du_monde(int fin_du_monde) {
+		this.fin_du_monde = fin_du_monde;
 	}
 
 	private void chargerLabyrinthe(int nv) {
@@ -113,6 +114,7 @@ public class LabyrintheGameGUI {
 		int dx=0;
 		int dy=0;
 		setP(0);
+		setFin_du_monde(0);
 
 		switch(keyCode) {
 		case KeyEvent.VK_LEFT:
@@ -225,6 +227,7 @@ public class LabyrintheGameGUI {
 
 		int cout=a.cout_epe();
 		if (cout==1){
+			if (monmon.nb_PV>1) {
 			if (getP()==1) {
 				if (monmon.getNb_PV()>30){
 					int pv_monstre=monmon.getNb_PV();
@@ -238,9 +241,11 @@ public class LabyrintheGameGUI {
 
 				}
 			}
+			}
 		}
 		int cout2=a2.cout_epe();
 		if (cout2==1){
+			if (fonfon.nb_PV>1) {
 			if (getP()==1) {
 				if (fonfon.getNb_PV()>30){
 					int pv_monstre=fonfon.getNb_PV();
@@ -253,6 +258,7 @@ public class LabyrintheGameGUI {
 					System.out.println("Bim");
 
 				}
+			}
 			}
 		}
 
@@ -275,30 +281,35 @@ public class LabyrintheGameGUI {
 			labyrinthePanel.repaint();
 		}
 	
-	if (hero.nb_PV==0) {
-		System.out.println("Vous avez perdu !");
-		setFindumonde(0);
-		if (getFindumonde()==0) {
-			frame = new JFrame("Je sors du labyrinthe");
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			frame.setSize(800, 800);
-			
-			LabyrinthePanel labyrinthePanefin = new LabyrinthePanel(this,hero,monmon,fonfon);
-			frame.add(labyrinthePanefin);
-			labyrinthePanefin.setVisible(true);
-			
-			labyrinthePanefin.setVisible(true);
-			labyrinthePanefin.requestFocusInWindow();
-			
-			frame.setVisible(true);
 
+	if (hero.nb_PV==0) {
+			JOptionPane.showMessageDialog(null, "Vous avez perdu !", "Fin du labyrinthe", JOptionPane.INFORMATION_MESSAGE);		
+		}
+	if (s.Fin(fonfon, fin)==1) {
+		JOptionPane.showMessageDialog(null, "Vous avez gagnez !", "Fin du labyrinthe", JOptionPane.INFORMATION_MESSAGE);		
+	}
+	findumonde();
+	}
+	
+	public int findumonde() {
+		if (monmon.getNb_PV()<1) {
+			setFin_du_monde(1);
+		}
+		if (getFin_du_monde()==1) {
+			createAndShowGUI();
+			monmon.setNb_PV(1);
+		}
+		if (fonfon.getNb_PV()<1) {
+			setFin_du_monde(2);
 			
 		}
+		if (getFin_du_monde()==2) {
+			createAndShowGUI();
+			fonfon.setNb_PV(1);
+		}
+		return(1);
 		
 	}
-	}
-
-
 
 	//tt les cas dans lequel le héros peut avancer
 	public boolean isValidMove(int newX, int newY) {
@@ -317,6 +328,8 @@ class LabyrinthePanel extends JPanel {
 	private int monstreY;
 	private int fonfonX;
 	private int fonfonY;
+	int pv_monmon;
+	int pv_fontome;
 	//initialise mon héros a la case 1,1
 	//position à prendre de guillian après pour avoir sa vrai position 
 
@@ -374,7 +387,8 @@ class LabyrinthePanel extends JPanel {
 		this.monstreY=monmon.getPositionY();
 		this.fonfonX=fonfon.getPositionX();
 		this.fonfonY=fonfon.getPositionY();
-
+		this.pv_monmon=monmon.getNb_PV();
+		this.pv_fontome=fonfon.getNb_PV();
 
 		try {
 			Brique = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Brique.png")); 
@@ -390,6 +404,7 @@ class LabyrinthePanel extends JPanel {
 			e.printStackTrace();
 		}
 	}
+	
 
 
 	@Override //c'est pour lui dire qu'on remplace la methode qui est dans JPanel
@@ -407,10 +422,10 @@ class LabyrinthePanel extends JPanel {
 				else if (i == getHeroY() && j == getHeroX()) {
 					g.drawImage(Heros, j * cellSize, i * cellSize, cellSize, cellSize, null);
 				}
-				else if (i == getMonstreY() && j == getMonstreX()) {
+				else if (i == getMonstreY() && j == getMonstreX() && this.pv_monmon>1) {
 					g.drawImage(Monstre, j * cellSize, i * cellSize, cellSize, cellSize, null);
 				}
-				else if (i == getFantomeY() && j == getFantomeX()) {
+				else if (i == getFantomeY() && j == getFantomeX() && this.pv_fontome >1 ) {
 					g.drawImage(Fantome, j * cellSize, i * cellSize, cellSize, cellSize, null);
 				}
 				else if (parent.labyrinthe[i][j] == 2) {

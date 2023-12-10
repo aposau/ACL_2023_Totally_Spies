@@ -1,6 +1,4 @@
-package projproj;
-
-
+package proj_Ro;
 
 
 public class Attaque {
@@ -11,16 +9,12 @@ public class Attaque {
 	int Y_hero;
 
 
-
 	public Attaque ( Personnage monmon, Personnage charles) {
 		this.X_mon= monmon.getPositionX();
 		this.Y_mon= monmon.getPositionY();
 
 		this.X_hero= charles.getPositionX();
 		this.Y_hero= charles.getPositionY();
-
-
-
 	}
 
 	public int perte_de_pv(int pv) {
@@ -41,8 +35,10 @@ public class Attaque {
 	public void attaque_contact(Personnage hero, Personnage monstre ) {
 		int touche = contact();
 		if (touche==1) {
-			hero.setNb_PV(0);
-			System.out.println("Boum");
+			if(monstre.nb_PV>1) {
+				hero.setNb_PV(0);
+				System.out.println("Boum");
+			}
 		}
 	}
 
