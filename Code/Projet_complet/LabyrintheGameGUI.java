@@ -9,12 +9,13 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class LabyrintheGameGUI {
-	
+
 	int p;
 	int pv_mon=150;
 	int pv_hero=150;
 	int plein=1;
 	int nv=1;
+	int findumonde=1;
 
 
 	Personnage monstre= new Personnage(pv_mon,3,3);
@@ -35,7 +36,7 @@ public class LabyrintheGameGUI {
 		this.p=0;
 		chargerLabyrinthe(nv);
 	}
-	
+
 	public int getP() {
 		return p;
 	}
@@ -44,6 +45,14 @@ public class LabyrintheGameGUI {
 	}
 
 
+	public int getFindumonde() {
+		return findumonde;
+	}
+
+	public void setFindumonde(int findumonde) {
+		this.findumonde = findumonde;
+	}
+
 	private void chargerLabyrinthe(int nv) {
 		Labyrinthe labyrintheLoader = new Labyrinthe(nv);
 		this.labyrinthe = labyrintheLoader.lireFichier();
@@ -51,6 +60,10 @@ public class LabyrintheGameGUI {
 
 	public void createAndShowGUI() {
 		frame = new JFrame("Je suis le labyrinthe");
+
+
+			
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800, 800);
 
@@ -58,6 +71,8 @@ public class LabyrintheGameGUI {
 		LabyrinthePanel labyrinthePanel = new LabyrinthePanel(this,hero,monmon,fonfon);
 		frame.add(labyrinthePanel);
 		labyrinthePanel.setVisible(true);
+		
+	
 
 		labyrinthePanel.addKeyListener(new KeyListener() {
 			@Override
@@ -67,11 +82,11 @@ public class LabyrintheGameGUI {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				moveHero(e.getKeyCode());
-				System.out.println("Key pressed: " + e.getKeyCode());
+				/*System.out.println("Key pressed: " + e.getKeyCode());
 				System.out.println("Hero:");
 				System.out.println(hero);
 				System.out.println("Monstre");
-				System.out.println(monmon);
+				System.out.println(monmon);*/
 			}
 
 			@Override
@@ -79,14 +94,19 @@ public class LabyrintheGameGUI {
 			}
 
 		});
-		
+
 		// rend le labyrinthe visible
 		labyrinthePanel.setVisible(true);
 		labyrinthePanel.requestFocusInWindow();
+		
+
 
 		// rend le JFrame visible
 		frame.setVisible(true);
+
 	}
+
+
 
 
 	private void moveHero(int keyCode) {
@@ -103,7 +123,7 @@ public class LabyrintheGameGUI {
 				Monstre_normal monstrenormal = (Monstre_normal) monstre;
 				monstrenormal.deplacement_random();
 			}
-			*/
+			 */
 			break;
 		case KeyEvent.VK_RIGHT:
 			hero.move_right();
@@ -119,19 +139,18 @@ public class LabyrintheGameGUI {
 			break;
 		case KeyEvent.VK_ENTER:
 			setP(1);
-			System.out.println("proute");
 			break;
 		}
-		
+
 		//private void move_monstre() {
-			
+
 		//}
-		
+
 		Attaque a=new Attaque(monmon,hero);
 		Attaque a2=new Attaque(fonfon,hero);
 		Special s=new Special(hero,potion,trou,pic,fin);
-		
-		
+
+
 		int touche=a.contact();
 		if (touche==1){
 			if (getP()==1) {
@@ -195,49 +214,49 @@ public class LabyrintheGameGUI {
 			}
 		}
 
-			
-			a.attaque_contact(hero, monmon);
-			a2.attaque_contact(hero, fonfon);
-			s.Trou(hero, trou);
-			s.Pic(hero, pic);
-			s.Potion(hero, potion);
-			s.Fin(hero, fin);
-			
-			
-			int cout=a.cout_epe();
-			if (cout==1){
-				if (getP()==1) {
-					if (monmon.getNb_PV()>30){
-						int pv_monstre=monmon.getNb_PV();
-						monmon.setNb_PV(pv_monstre-30);
-						System.out.println("Bim");
-					}
-					else {
-						System.out.println("Le monstre est mort !");
-						monmon.setNb_PV(0);
-						System.out.println("Bim");
 
-					}
+		a.attaque_contact(hero, monmon);
+		a2.attaque_contact(hero, fonfon);
+		s.Trou(hero, trou);
+		s.Pic(hero, pic);
+		s.Potion(hero, potion);
+		s.Fin(hero, fin);
+
+
+		int cout=a.cout_epe();
+		if (cout==1){
+			if (getP()==1) {
+				if (monmon.getNb_PV()>30){
+					int pv_monstre=monmon.getNb_PV();
+					monmon.setNb_PV(pv_monstre-30);
+					System.out.println("Bim");
+				}
+				else {
+					System.out.println("Le monstre est mort !");
+					monmon.setNb_PV(0);
+					System.out.println("Bim");
+
 				}
 			}
-			int cout2=a2.cout_epe();
-			if (cout2==1){
-				if (getP()==1) {
-					if (fonfon.getNb_PV()>30){
-						int pv_monstre=fonfon.getNb_PV();
-						fonfon.setNb_PV(pv_monstre-30);
-						System.out.println("Bim");
-					}
-					else {
-						System.out.println("Le monstre est mort !");
-						fonfon.setNb_PV(0);
-						System.out.println("Bim");
+		}
+		int cout2=a2.cout_epe();
+		if (cout2==1){
+			if (getP()==1) {
+				if (fonfon.getNb_PV()>30){
+					int pv_monstre=fonfon.getNb_PV();
+					fonfon.setNb_PV(pv_monstre-30);
+					System.out.println("Bim");
+				}
+				else {
+					System.out.println("Le monstre est mort !");
+					fonfon.setNb_PV(0);
+					System.out.println("Bim");
 
-					}
 				}
 			}
-		
-		
+		}
+
+
 
 		LabyrinthePanel labyrinthePanel= (LabyrinthePanel) frame.getContentPane().getComponent(0);
 		/*
@@ -255,8 +274,32 @@ public class LabyrintheGameGUI {
 			labyrinthePanel.setMonstreY(labyrinthePanel.getMonstreY());*/
 			labyrinthePanel.repaint();
 		}
-	}
 	
+	if (hero.nb_PV==0) {
+		System.out.println("Vous avez perdu !");
+		setFindumonde(0);
+		if (getFindumonde()==0) {
+			frame = new JFrame("Je sors du labyrinthe");
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			frame.setSize(800, 800);
+			
+			LabyrinthePanel labyrinthePanefin = new LabyrinthePanel(this,hero,monmon,fonfon);
+			frame.add(labyrinthePanefin);
+			labyrinthePanefin.setVisible(true);
+			
+			labyrinthePanefin.setVisible(true);
+			labyrinthePanefin.requestFocusInWindow();
+			
+			frame.setVisible(true);
+
+			
+		}
+		
+	}
+	}
+
+
+
 	//tt les cas dans lequel le héros peut avancer
 	public boolean isValidMove(int newX, int newY) {
 		return newX>=0 && newX<labyrinthe[0].length 
@@ -267,7 +310,7 @@ public class LabyrintheGameGUI {
 }
 
 class LabyrinthePanel extends JPanel {
-	
+
 	private int heroX;
 	private int heroY;
 	private int monstreX;
@@ -304,7 +347,7 @@ class LabyrinthePanel extends JPanel {
 	public void setHeroY(int heroY) {
 		this.heroY = heroY;
 	}
-	
+
 	public int getMonstreX() {
 		return monstreX;
 	}
@@ -331,7 +374,7 @@ class LabyrinthePanel extends JPanel {
 		this.monstreY=monmon.getPositionY();
 		this.fonfonX=fonfon.getPositionX();
 		this.fonfonY=fonfon.getPositionY();
-		
+
 
 		try {
 			Brique = ImageIO.read(new File("C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\Brique.png")); 
