@@ -17,15 +17,34 @@ public class LabyrintheGameGUI {
 	int nv=1;
 	int fin_du_monde=0;
 
+	Labyrinthe lab=new Labyrinthe(nv);
+	int teste=4;
+
+
+	int [][] listPotion = lab.getPotion();
+	int [][] listtrou = lab.getTrou();
+	int [][] listpic = lab.getPic();
+
+
+
+	Objet_spe potion1=new Objet_spe(plein,listPotion[0][0],listPotion[0][1]);
+	Objet_spe potion2=new Objet_spe(plein,listPotion[1][0],listPotion[1][1]);
+	Objet_spe trou1=new Objet_spe(plein,listtrou[0][0],listtrou[0][1]);
+	Objet_spe trou2=new Objet_spe(plein,listtrou[1][0],listtrou[1][1]);
+	Objet_spe trou3=new Objet_spe(plein,listtrou[2][0],listtrou[2][1]);
+	Objet_spe trou4=new Objet_spe(plein,listtrou[3][0],listtrou[3][1]);
+	Objet_spe pic1=new Objet_spe(plein,listpic[0][0],listpic[0][1]);
+	Objet_spe pic2=new Objet_spe(plein,listpic[1][0],listpic[1][1]);
+	Objet_spe pic3=new Objet_spe(plein,listpic[2][0],listpic[2][1]);
+	Objet_spe pic4=new Objet_spe(plein,listpic[3][0],listpic[3][1]);
+	Objet_spe pic5=new Objet_spe(plein,listpic[4][0],listpic[4][1]);
+
 
 
 	Personnage monstre= new Personnage(pv_mon,3,3);
 	Monstre_normal monmon=new Monstre_normal(pv_mon,2,5,1);
 	Fantome fonfon = new Fantome(pv_mon,10,12,2);
 	Personnage hero= new Personnage(pv_hero,2,2);
-	Objet_spe potion=new Objet_spe(plein,5,4);
-	Objet_spe trou=new Objet_spe(plein,15,4);
-	Objet_spe pic=new Objet_spe(plein,20,10);
 	Objet_spe fin=new Objet_spe(plein,13,13);
 
 
@@ -147,10 +166,18 @@ public class LabyrintheGameGUI {
 		//private void move_monstre() {
 
 		//}
+		monmon.deplacement_random();
+
+		fonfon.deplacement_random_mur();
 
 		Attaque a=new Attaque(monmon,hero);
 		Attaque a2=new Attaque(fonfon,hero);
-		Special s=new Special(hero,potion,trou,pic,fin);
+		Special s=new Special(hero,potion1,trou1,pic1,fin);
+		Special s2=new Special(hero,potion2,trou2,pic2,fin);
+		Special s3=new Special(hero,potion1,trou3,pic3,fin);
+		Special s4=new Special(hero,potion1,trou4,pic4,fin);
+		Special s5=new Special(hero,potion1,trou1,pic5,fin);
+		
 
 
 		int touche=a.contact();
@@ -219,10 +246,20 @@ public class LabyrintheGameGUI {
 
 		a.attaque_contact(hero, monmon);
 		a2.attaque_contact(hero, fonfon);
-		s.Trou(hero, trou);
-		s.Pic(hero, pic);
-		s.Potion(hero, potion);
+		s.Trou(hero, trou1);
+		s.Pic(hero, pic1);
+		s.Potion(hero, potion1);
+		s2.Trou(hero, trou2);
+		s2.Pic(hero, pic2);
+		s2.Potion(hero, potion2);
+		s3.Trou(hero, trou3);
+		s3.Pic(hero, pic3);
+		s4.Trou(hero, trou4);
+		s4.Pic(hero, pic4);
+		s4.Pic(hero, pic5);
 		s.Fin(hero, fin);
+		
+		s.Mort(hero);
 
 
 		int cout=a.cout_epe();
@@ -273,6 +310,15 @@ public class LabyrintheGameGUI {
 			labyrinthePanel.repaint();
 		}
 	}*/
+		labyrinthePanel.setFonfonX(fonfon.getPositionX());
+
+		labyrinthePanel.setFonfonY(fonfon.getPositionY());
+		int newmonstreX=monmon.getPositionX();
+		int newmonstreY=monmon.getPositionY();
+		if (isValidMove(newmonstreX,newmonstreY)) {
+			labyrinthePanel.setMonstreX(newmonstreX);
+			labyrinthePanel.setMonstreY(newmonstreY);
+		}
 		if (isValidMove(labyrinthePanel.getHeroX()+dx,labyrinthePanel.getHeroY()+dy)) {
 			labyrinthePanel.setHeroX(labyrinthePanel.getHeroX() + dx);
 			labyrinthePanel.setHeroY(labyrinthePanel.getHeroY() + dy);
@@ -285,7 +331,7 @@ public class LabyrintheGameGUI {
 	if (hero.nb_PV==0) {
 			JOptionPane.showMessageDialog(null, "Vous avez perdu !", "Fin du labyrinthe", JOptionPane.INFORMATION_MESSAGE);		
 		}
-	if (s.Fin(fonfon, fin)==1) {
+	if (s.Fin(hero, fin)==1) {
 		JOptionPane.showMessageDialog(null, "Vous avez gagnez !", "Fin du labyrinthe", JOptionPane.INFORMATION_MESSAGE);		
 	}
 	findumonde();
@@ -360,6 +406,31 @@ class LabyrinthePanel extends JPanel {
 	public void setHeroY(int heroY) {
 		this.heroY = heroY;
 	}
+	
+
+	public int getFonfonX() {
+		return fonfonX;
+	}
+
+	public void setFonfonX(int fonfonX) {
+		this.fonfonX = fonfonX;
+	}
+
+	public int getFonfonY() {
+		return fonfonY;
+	}
+
+	public void setFonfonY(int fonfonY) {
+		this.fonfonY = fonfonY;
+	}
+
+	public void setMonstreX(int monstreX) {
+		this.monstreX = monstreX;
+	}
+
+	public void setMonstreY(int monstreY) {
+		this.monstreY = monstreY;
+	}
 
 	public int getMonstreX() {
 		return monstreX;
@@ -375,6 +446,7 @@ class LabyrinthePanel extends JPanel {
 	public int getFantomeY() {
 		return fonfonY;
 	}
+	
 
 	//ajout constructeur avec la ref à l'instance
 	public LabyrinthePanel(LabyrintheGameGUI parent,Personnage hero,Monstre_normal monmon, Fantome fonfon) {

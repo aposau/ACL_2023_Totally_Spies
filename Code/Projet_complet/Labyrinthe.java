@@ -1,4 +1,4 @@
-
+package proj_Ro;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,6 +17,7 @@ public class Labyrinthe{
 	public int[][] lireFichier() {
 		String cheminFichier=null;
 		if (this.nv==1) {
+
 
 			cheminFichier="C:\\Users\\r0man\\OneDrive\\Documents\\Ensem\\2A\\Info\\javoute\\Projet\\LabyrintheNiveauFacile.txt";
 
@@ -92,6 +93,7 @@ public class Labyrinthe{
 		}
 
 	}
+	
 	public int[][] getPic(){
 		int[][] tableau = lireFichier();
 		int [][] liste = new int [5][2];
@@ -104,11 +106,11 @@ public class Labyrinthe{
 					num++;
 				}
 			}
-
 		}
 		return liste;
 
 	}
+	
 	public int[][] getPotion(){
 		int[][] tableau = lireFichier();
 		int [][] liste = new int [2][2];
@@ -125,6 +127,7 @@ public class Labyrinthe{
 		}
 		return liste;
 	}
+	
 	public int[][] getTrou(){
 		int[][] tableau = lireFichier();
 		int [][] liste = new int [4][2];
@@ -141,6 +144,7 @@ public class Labyrinthe{
 		}
 		return liste;
 	}
+	
 	public int[][] getFin(){
 		int[][] tableau = lireFichier();
 		int [][] liste = new int [1][2];

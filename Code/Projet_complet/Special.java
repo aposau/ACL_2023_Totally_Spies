@@ -42,6 +42,8 @@ public class Special {
 				if( popo.getPlein()==1) {
 					int pv_hero=charles.getNb_PV();
 					charles.setNb_PV(pv_hero+50);
+					System.out.println("Vous avez pris une potion !");
+					System.out.println(charles);
 					popo.setPlein(0);
 				}
 			}
@@ -52,6 +54,8 @@ public class Special {
 			if (this.Y_pic == this.Y_hero && charles.getNb_PV()>=100) {
 				int pv_hero=charles.getNb_PV();
 				charles.setNb_PV(pv_hero-100);
+				System.out.println("Vous avez êtes aller sur un pic !");
+				System.out.println(charles);
 			}
 			else {
 				charles.setNb_PV(0);
@@ -62,6 +66,8 @@ public class Special {
 		if (this.X_trou == this.X_hero) {
 			if (this.Y_trou == this.Y_hero) {
 				charles.setNb_PV(0);
+				System.out.println("Vous avez êtes aller dans un trou !");
+				System.out.println(charles);
 				trou.setPlein(0);
 			}
 		}
@@ -70,6 +76,7 @@ public class Special {
 		int p=0;
 		if (this.X_fin == this.X_hero) {
 			if (this.Y_fin == this.Y_hero) {
+				p=1;
 				System.out.println("Vous avez gagnez !!");
 			}
 		}
