@@ -1,0 +1,57 @@
+Spring Total:
+
+Sprint 1:
+- Discussion des fonctionnalité du jeux        					    ->Tout le monde
+- Prévsualisation des classes par le groupe					    ->Tout le monde
+-Création des classes attaques, main vérification                                   -> Romane
+- Creation de la classe LabyrintheGameGui,main de vérification                       -> Apolline
+- Création des classes Personnage, Hero et monstre                                   ->Guillian
+-Création de la classe Labyrinthe                                                   -> Thomas
+
+Sprint 2 :
+
+- Au niveau de l'interface graphique, le labyrinthe 
+(niveau facile) s'affiche ainsi que le héros.                                       ->Apolline
+- Le héros se déplace sur l'interface graphique 
+lorsque les touches fléchées sont utilisées.                                        ->Apolline
+- Tous les personnages ont des fonctions pour se déplacer.            		    ->Guilian
+- Dans la classe attaque, le héros meurt au contact des monstres, 
+peut donner un coup d'épée en appuyant sur la touche entrée,
+ il peut rentrer en contact et donner un coup d'épée s'ils sont sur la même case.    ->Romane
+- Main commun entre classe personnage et attaque.                                    ->Romane
+- Les monstres se déplacent de manière aléatoire.                                    -Guillian
+- Des objets spéciaux ont été codés : pic, trou et potions.                          ->Romane
+- Création de la classe spéciale avec l'utilisation des objets spéciaux 
+et intéraction entre les objets spéciaux et le héro                                  ->Romane
+- La classe labyrinthe peut charger des labyrinthes
+ issus de fichiers txt différents selon le niveau choisi.                             ->Thomas
+- L'interface graphique utilise la classe Labyrinthe
+ pour récupérer le labyrinthe.                                                        ->Apolline
+
+
+Sprint 3:
+
+- Main commun à toutes les classes                                                ->Romane 
+- Le labyrinthe possède des cases pour les objets spéciaux                         ->Thomas 
+- Le labyrinthe affiche les objets spéciaux ainsi 
+que le monstre                                                                   ->Apolline
+- L'utilisateur peut choisir le niveau de labyrinthe qu'il veut jouer.            ->Apolline
+- Création des classes Monstre_normal et 
+Fantomes avec des méthodes différentes                                            -> Guillian
+- Réalisation de test Junit (verifier que le heros ne peut pas 
+aller sur des briques ou en dehors du labyrinthe + 
+le héros meurt en cas de contact avec le monstre +
+ le heros ne peut pas avoir de PV négatifs).                                      ->Apolline
+-Rectification de l'erreur après test : pv négatif manque d'une condition         ->Apolline
+
+Sprint 4:
+
+
+- relier la position des objets speciaux dans le labyrinthe à la classe objets speciaux
+ pour que le heros puissent interragir avec les objets                        -> Thomas et Romane 
+- arret du jeu lorsque le héros meurt ou lorsqu'il gagne (arrive à la case de Fin) 
+et si possible afficher une fenetre à message                                 -> Apolline et Romane
+-Disparition des monstres de l'interface graphiques
+ lors de la mort de l'un d'eux              				      ->Romane
+- faire bouger les monstres (normaux et fantome) sur le labyrinthe            -> Guillian et Apolline 
+- realiser une partie jouable du debut a la fin                               -> tout le monde 
