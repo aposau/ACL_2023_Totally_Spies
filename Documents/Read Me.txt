@@ -1,0 +1,5 @@
+Read Me
+
+Pour téléchargé le jeu il faut télécharger le fichier sur GitHub avec nos codes de jeux. Ensuite il faut modifier les adresses des images présentes dans le jeux et renter celle de son propre ordinateur.
+
+Pour jouer au jeux il suffit de lancer le programme et un pannel s'execute avec la fenetre de jeux.
